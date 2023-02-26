@@ -1,13 +1,18 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { store } from './app/store';
+import { applyMiddleware, legacy_createStore as createStore } from 'redux';
+import authReducer from './reducers/authReducer';
+//import { store } from './app/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import thunk from 'redux-thunk';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
+
+const store = createStore(authReducer, applyMiddleware(thunk))
 
 root.render(
   <React.StrictMode>
